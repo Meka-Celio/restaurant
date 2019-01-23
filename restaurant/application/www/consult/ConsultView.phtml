@@ -1,0 +1,29 @@
+<!-- Message de notification -->
+
+<!-- Code HTML à écrire -->
+
+<!-- Liste des aliments -->
+<table class="generic-table meal-list">
+    <caption>
+      <?php echo $meal['Name']; ?>
+    </caption>
+    <tbody>
+          <tr>
+            <td>
+               <img src="<?= $wwwUrl ?>/images/meals/<?= $meal['Photo']; ?>" alt="" style="height: 350px;width: 380px;">
+            </td>
+          </tr>
+		      <tr>
+              <th>Description</th>
+          </tr>
+          <tr>
+            <td><?php echo $meal['Description']; ?></td>
+          </tr>
+          <tr>
+            <th colspan="2">Prix</th>
+          </tr>
+          <tr>
+            <td colspan="2"><?php echo $meal['BuyPrice']; ?> £</td>
+          </tr>
+    </tbody>
+</table>

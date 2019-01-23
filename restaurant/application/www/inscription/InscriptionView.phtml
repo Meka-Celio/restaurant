@@ -1,0 +1,69 @@
+<form action="<?= $requestUrl ?>/inscription" method="post" class="generic-form">
+		<fieldset>	
+			<legend><h3>Inscription</h3></legend>
+		<p>
+			<label for="firstname">FirstName</label>
+			<input type="text" name="firstname" value="" placeholder="" id="firstname" required="">
+		</p>
+		</fieldset>
+		<fieldset>
+		<p>
+			<label for="lastname">LastName</label>
+			<input type="text" name="lastname" value="" placeholder="" id="lastname" required="">
+		</p></fieldset>
+		<fieldset>
+			<p>
+			<label for="mail">Email</label>
+			<input type="email" name="email" value="" placeholder="" id="mail" required="">
+		</p>
+		</fieldset>
+		<fieldset>
+		<p>
+			<label for="motdepasse">Password</label>
+			<input type="password" name="motdepasse" value="" placeholder="" id="motdepasse" required="">
+		</p></fieldset>
+		<fieldset>
+		<p>
+			<label for="birthdate">BirthDate</label>
+			<input type="date" name="birthdate" value="" placeholder="" id="birthdate" required="">
+		</p>
+		</fieldset>
+		<fieldset>
+		<p>
+			<label for="address">Address</label>
+			<input type="text" name="address" value="" placeholder="" id="address" required="">
+		</p>
+		</fieldset>
+		<fieldset>
+		<p>
+			<label for="city">City</label>
+			<input type="text" name="city" value="" placeholder="" id="city" required="">
+		</p>
+		</fieldset>
+		<fieldset>
+		<p>
+			<label for="zipcode">ZipCode</label>
+			<input type="text" name="zipcode" value="" placeholder="" id="zipcode" required="">
+		</p>
+			</fieldset>
+		<fieldset>
+		<p>
+			<label for="country">Country</label>
+			<input type="text" name="country" value="" placeholder="" id="country" required="">
+		</p>
+		</fieldset>
+		<fieldset>
+		<p>
+			<label for="phone">Phone</label>
+			<input type="text" name="phone" value="" placeholder="" id="phone" required="">
+		</p>
+		</fieldset>
+		
+			<input type="hidden" name="creationtimestamp" value="<?php echo date("Y-m-d"); ?>" placeholder="" id="creationtimestamp">
+		
+			<input type="hidden" name="lastlogintimestamp" value="<?= date("Y-m-d H:i");  ?>" placeholder="" id="lastlogintimestamp">
+		<p>
+			<button class="button button-primary">Valider</button>
+		</p>
+
+</form>

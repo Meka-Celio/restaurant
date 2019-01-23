@@ -1,0 +1,181 @@
+<?php 
+extract($_GET);
+?>
+
+<!-- Generate photo -->
+		<?php foreach ($meals as $m): ?>
+			<input type="hidden" name="photo" value="<?php echo $m['Photo']; ?>" id="photo-<?php echo $m['Id']; ?>">
+		<?php endforeach; ?>
+		<!-- ------------------ -->
+
+<!-- Generate buyprice -->
+					<?php foreach ($meals as $m): ?>
+						<input type="hidden" name="buyprice" id="buyprice_<?php echo $m['Id']; ?>"" value="<?php echo $m['BuyPrice']; ?>">
+					<?php endforeach; ?>
+					<!-- -------------------- -->
+
+<form action="" method="post">
+	<fieldset>
+	<input type="hidden" name="id_user" id="id_user" value="<?php echo $resultId; ?>">
+	<table>
+		<tr>
+			<td>
+				<p>
+					<label for="">Produits</label>
+					<!-- 
+					* Recupération de l'url
+					 -->
+					<input type="hidden" value="<?= $wwwUrl; ?>" id="url">
+					<select name="meal_id" id="meal_id" onChange="OnChangeMealId()">
+						<datalist id="meal">
+							<!-- Generate meal_ID -->
+							<?php foreach ($meals as $m): ?>
+								<option value="<?php echo $m['Id'] ?>"><?php echo $m['Name']; ?></option>
+							<?php endforeach; ?>
+							<!-- ------ -->
+						</datalist>
+					</select>
+				</p>
+			</td>
+		</tr>
+		<tr> 
+			<td>
+				<p>
+					<label for="">Image</label>
+					<img src="" id="img" alt="" style="height: 300px;width: 360px;">
+					<!-- <span id="img" src=""></span> -->
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<p>
+					<label for="qte">Quantité :</label>
+					<input type="text" name="qte" value="" placeholder="" id="qte">
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<p>
+					<label for="saleprice">Prix de vente : </label>
+					<label for="" id="pvente"></label>
+				</p>
+			</td>
+		</tr>
+			<tr>
+				<td>
+					<button class="button button-primary" id="btnok" onclick="">Ajouter au panier</button>
+					<a href="?validate=consult&idUser=<?php echo $resultId; ?>" class="button" disabled>Voir le panier</a>
+				</td>
+			</tr>
+	</table>
+</fieldset>
+</form>
+
+	<!-- ------------------------------------------- 
+		Panier 
+	------------------------------------------- -->
+<form action="<?php echo $requestUrl ?>/payment" method="post">
+	<fieldset>
+		<table class="generic-table">
+			<thead>
+				<tr>
+					<th>Produits</th>
+					<th>Nom Produits</th>
+					<th>Prix Unitaire</th>
+					<th>Quantité</th>
+					<th>Montant</th>
+				</tr>
+			</thead>
+			<tbody id="panier_body">
+			<form action="<?php echo $requestUrl ?>/orderline?id_user=<?php echo $resultId; ?>" method="post">
+				<?php if (isset($validate) && $validate == 'ok'): ?>
+					<?php if ($resultId == $idUser): ?>
+						 <!-- <?php //var_dump($mealcommand); ?> -->
+						 <?php foreach ($mealcommand as $order): ?>
+
+						 	<tr>
+						 		<input type="hidden" name="id_order" value="<?php echo $order['Id']; ?>" placeholder="">
+						 		<td>
+						 			<img src="<?= $wwwUrl ?>/images/meals/<?php echo $order['Photo']; ?>" alt="" style="height: 90px; width: 100px; border-radius: 12px;">
+						 		</td>
+						 		<td><?php echo $order['Name']; ?></td>
+						 		<td><?php echo $order['BuyPrice']; ?></td>
+						 		<td><?php echo $order['Qte']; ?></td>
+						 		<td>
+						 			<?php 
+						 				$montant = 0;
+						 				$montant = $order['Qte'] * $order['BuyPrice'];
+						 				echo $montant.' DH';
+						 			 ?>
+						 		</td>
+						 		<td>
+						 			<a href="<?php echo $requestUrl ?>/orderdelete?Id=<?php echo $order['Id'] ?>&action=delete" class="button button-cancel">Supprimer</a>
+						 		</td>
+						 	</tr>
+						 	<?php $somme = 0;
+								$somme += $montant;
+						 ?>
+						<?php endforeach; ?>
+						<tr>
+							<td>
+								<?php foreach ($montantTotal as $total): ?>
+									<p name="total" class="button">
+									<!-- <?php //var_dump($montantTotal); ?> -->
+									<input type="text" name="total" value="<?php echo $total['ROUND(SUM(BuyPrice * Qte),2)']; ?> DH" placeholder="">
+									</p>
+								<?php endforeach; ?>
+								<input type="hidden" name="id_user" id="id_user" value="<?php echo $resultId; ?>">
+								<button class="button button-primary">Valider la commande</button>
+							</td>
+						</tr>
+					<?php endif; ?>
+				<?php endif; ?>
+				<!-- ----------------------------------------------------
+				--------------------------------------------------------
+				-------------------------------------------------------- -->
+				<?php if (isset($validate) && $validate == 'consult'): ?>
+						<?php foreach ($mealcommand as $order): ?>
+						 	<tr>
+						 		<td>
+						 			<input type="hidden" name="id_order" value="<?php echo $order['Id']; ?>" placeholder="">
+						 			<img src="<?= $wwwUrl ?>/images/meals/<?php echo $order['Photo']; ?>" alt="" style="height: 90px; width: 100px; border-radius: 12px;">
+						 		</td>
+						 		<td><?php echo $order['Name']; ?></td>
+						 		<td><?php echo $order['BuyPrice']; ?></td>
+						 		<td><?php echo $order['Qte']; ?></td>
+						 		<td>
+						 			<?php 
+						 				$montant = 0;
+						 				$montant = $order['Qte'] * $order['BuyPrice'];
+						 				echo $montant.' DH';
+						 			 ?>
+						 		</td>
+						 		<td>
+						 			<a href="<?php echo $requestUrl ?>/orderdelete?Id=<?php echo $order['Id'] ?>&action=delete" class="button button-cancel">Supprimer</a>
+						 		</td>
+						 	</tr>
+						<?php endforeach; ?>
+						<tr>
+							<td>
+								<?php foreach ($montantTotal as $total): ?>
+									<p name="total" class="button ">
+									<!-- <?php //var_dump($montantTotal); ?> -->
+									<input type="text" name="total" value="<?php echo $total['ROUND(SUM(BuyPrice * Qte),2)']; ?> DH" placeholder="" style="color:darkgreen;">
+									</p>
+								<?php endforeach; ?>
+								<input type="hidden" name="id_user" id="id_user" value="<?php echo $resultId; ?>">
+								<button class="button button-primary">Valider la commande</button>
+							</td>
+						</tr>
+					<?php else: ?>
+					<?php endif; ?>
+				</form>
+			</tbody>
+				
+		</table>
+	</fieldset>
+</form>
+
+							

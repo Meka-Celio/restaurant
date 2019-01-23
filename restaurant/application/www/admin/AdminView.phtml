@@ -1,0 +1,39 @@
+<!-- Message de notification -->
+
+<!-- Code HTML à écrire -->
+
+<!-- Liste des aliments -->
+<table class="generic-table meal-list">
+    <caption>Carte du restaurant</caption>
+    <tbody>
+		      <tr>
+              <th>Image</th>
+              <th>Nom</th>
+              <th>Description</th>
+              <th>Prix</th>  
+          </tr>
+       <?php foreach ($meals as $meal): ?>
+       		<tr>
+       			<td>
+       				<img src="<?= $wwwUrl ?>/images/meals/<?= $meal['Photo']; ?>" alt="" style="height: 200px; width: 240px;">
+       			</td>
+       			<td><?= $meal['Name']; ?></td>
+       			<td><?php echo $meal['Description']; ?></td>
+       			<td><?= $meal['BuyPrice']." DH"; ?></td>
+            <td>
+              <div>
+                <a href="<?php echo $requestUrl ?>/consult?id=<?php echo $meal['Id']; ?>&action=consult" class="button" disabled>Consulter</a>
+                <br>
+                <a href="<?php echo $requestUrl ?>/modif?id=<?php echo $meal['Id']; ?>&action=modif" class="button button-primary" >Modifier</a>
+                <br>
+                <a href="<?php echo $requestUrl ?>/delete?id=<?php echo $meal['Id']; ?>&action=del" class="button button-cancel" >Supprimer</a>
+              </div>
+            </td>
+       		</tr>
+ 		   <?php endforeach; ?>
+    </tbody>
+</table>
+
+<div>
+  <a href="<?= $requestUrl ?>/ajouter?action=ajouter" class="button button-primary">Ajouter un aliment +</a>
+</div>

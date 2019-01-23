@@ -1,0 +1,8 @@
+<?php 
+
+extract($_GET);
+
+if(isset($_GET['action']) && $_GET['action'] == 'delete' )
+{
+	header("location: $requestUrl/order?action=del&idUser=$resultId");
+}

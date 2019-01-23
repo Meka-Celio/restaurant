@@ -1,0 +1,14 @@
+<form action="<?php echo $requestUrl ?>/connexion" class="generic-form" method="post">
+	<h3>Connexion</h3>
+	<fieldset>
+		<p>Email</p>
+		<input type="text" name="email" value="" placeholder="" required="">
+	</fieldset>
+
+	<fieldset>
+		<p>Mot de Passe</p>
+		<input type="password" name="motdepasse" value="" placeholder="" required="">
+	</fieldset>
+	<input type="hidden" name="lastlogintimestamp" value="<?php echo date('Y-m-d H:i'); ?>" placeholder="">
+	<button class="button button-primary">Valider</button>
+</form>

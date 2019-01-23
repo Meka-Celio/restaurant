@@ -1,0 +1,27 @@
+<form action="<?php echo $requestUrl ?>/modif?id=<?php echo $_GET['id']; ?>" method="post" class="generic-form">
+	<input type="hidden" name="id" value="<?php echo $_GET['id']; ?>" placeholder="">
+	<fieldset>
+		<legend>Modification d'aliment</legend>
+		<label for="name">Nom de l'aliment</label>
+		<input type="text" name="name" value="<?php echo $meal['Name']; ?>" placeholder="" id="name" >
+	</fieldset>
+	<fieldset>
+		<label for="desc">Description</label>
+		<textarea name="description" id="desc" cols="35" rows="7" placeholder="<?php echo $meal['Description']; ?>"></textarea>
+	</fieldset>
+	<fieldset>
+		<label for="">Chemin Photo</label>
+		<input type="file" name="photo" value="<?php echo $meal['Photo']; ?>" placeholder="">
+	</fieldset>
+	<fieldset>
+		<label for="">Quantité en stock</label>
+		<input type="number" name="quantityinstock" value="<?php echo $meal['QuantityInStock']; ?>" placeholder="">
+		/
+		<label for="">Prix d'achat</label>
+		<input type="number" name="buyprice" value="<?php echo $meal['BuyPrice']; ?>" placeholder="">£
+		/
+		<label for="">Prix de vente</label>
+		<input type="number" name="saleprice" value="<?php echo $meal['SalePrice']; ?>" placeholder="">£
+	</fieldset>
+	<button class="button button-primary">Valider</button>
+</form>

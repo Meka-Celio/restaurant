@@ -1,0 +1,27 @@
+<form action="<?php echo $requestUrl ?>/ajouter" method="post">
+	
+	<fieldset>
+		<legend>Ajout d'aliment</legend>
+		<label for="name">Nom de l'aliment</label>
+		<input type="text" name="name" value="" placeholder="" id="name">
+	</fieldset>
+	<fieldset>
+		<label for="desc">Description</label>
+		<textarea name="description" id="desc" cols="35" rows="7" placeholder=""></textarea>
+	</fieldset>
+	<fieldset>
+		<label for="">Chemin Photo</label>
+		<input type="file" name="photo" value="" placeholder="">
+	</fieldset>
+	<fieldset>
+		<label for="">Quantité en stock</label>
+		<input type="number" name="quantityinstock" value="" placeholder="">
+		/
+		<label for="">Prix d'achat</label>
+		<input type="number" name="buyprice" value="" placeholder="">
+		/
+		<label for="">Prix de vente</label>
+		<input type="number" name="saleprice" value="" placeholder="">
+	</fieldset>
+	<button class="button button-primary">Valider</button>
+</form>

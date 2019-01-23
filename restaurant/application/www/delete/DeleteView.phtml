@@ -1,0 +1,8 @@
+<?php 
+
+extract($_GET);
+
+if(isset($_GET['action']) && $_GET['action'] == 'del' )
+{
+	header("location: $requestUrl/admin?action=del");
+}
